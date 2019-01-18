@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/luanvotrongdev/get_wifi_info.svg?branch=master)](https://travis-ci.com/luanvotrongdev/get_wifi_info)
+
 # get_wifi_info
 
 A flutter plugin to get Wifi IP info.

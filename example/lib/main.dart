@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  WifiInfo _result;
 
   @override
   void initState() {
@@ -22,12 +22,12 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
+    WifiInfo info;
     try {
-      platformVersion = await GetWifiInfo.platformVersion;
+      info = await GetWifiInfo.getWifiInfo;
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      print('Failed to get broadcast IP.');
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _result = info;
     });
   }
 
@@ -48,7 +48,16 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: _result == null ?
+          Text("Getting Wifi Info") :
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("IP: ${_result.ip}"),
+              Text("Netmask: ${_result.netmask}"),
+              Text("Broadcast IP: ${_result.broadcastIP}"),
+            ],
+          ),
         ),
       ),
     );

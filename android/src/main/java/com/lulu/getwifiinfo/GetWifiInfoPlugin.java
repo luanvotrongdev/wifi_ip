@@ -1,6 +1,8 @@
-package com.lulu.flutterwifiinfo;
+package com.lulu.getwifiinfo;
 
 import android.content.Context;
+import android.net.DhcpInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import java.net.InetAddress;
@@ -15,6 +17,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
+import static android.content.Context.WIFI_SERVICE;
+
 /** GetWifiInfoPlugin */
 public class GetWifiInfoPlugin implements MethodCallHandler {
   final String TAG= "GetWifiInfoPlugin";
@@ -23,7 +27,7 @@ public class GetWifiInfoPlugin implements MethodCallHandler {
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.lulu.plugin/get_wifi_info");
-    channel.setMethodCallHandler(new GetWifiInfoPlugin(registrar.context));
+    channel.setMethodCallHandler(new GetWifiInfoPlugin(registrar.context()));
   }
 
   GetWifiInfoPlugin(Context ctx)
@@ -42,26 +46,25 @@ public class GetWifiInfoPlugin implements MethodCallHandler {
 
   public HashMap<String, String> getWifiIP() {
     HashMap<String, String> result;
-    System.setProperty("java.net.preferIPv4Stack", "true");
-    try
-    {
-      for (Enumeration<NetworkInterface> niEnum = NetworkInterface.getNetworkInterfaces(); niEnum.hasMoreElements();) {
-        NetworkInterface ni = niEnum.nextElement();
-        if (!ni.isLoopback()) {
-          for (InterfaceAddress interfaceAddress : ni.getInterfaceAddresses()) {
-            result = new HashMap<>();
-            result.put("ip", interfaceAddress.getAddress().toString());
-            result.put("netmask", interfaceAddress.toString());
-            result.put("broadcastIP", interfaceAddress.getBroadcast().toString().substring(1));
-            return result;
-          }
-        }
-      }
-    }
-    catch (Exception e)
-    {
+    try {
+      WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(WIFI_SERVICE);
+      DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+
+      result = new HashMap<>();
+      result.put("ip", intToIp(dhcpInfo.ipAddress));
+      result.put("netmask", intToIp(dhcpInfo.netmask));
+      result.put("broadcastIP", intToIp((dhcpInfo.ipAddress & dhcpInfo.netmask) | ~dhcpInfo.netmask));
+      return result;
+    } catch (Exception e) {
       Log.e(TAG, e.getMessage());
     }
     return null;
+  }
+
+  String intToIp(int i) {
+    return (i & 0xFF) + "." +
+            ((i >> 8) & 0xFF) + "." +
+            ((i >> 16) & 0xFF) + "." +
+            ((i >> 24) & 0xFF);
   }
 }

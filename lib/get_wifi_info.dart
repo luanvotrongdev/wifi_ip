@@ -13,7 +13,7 @@ class WifiInfo {
         broadcastIP = map["broadcastIP"];
 }
 
-class FlutterWifiInfo {
+class GetWifiInfo {
   static const MethodChannel _channel =
   const MethodChannel('com.lulu.plugin/get_wifi_info');
 

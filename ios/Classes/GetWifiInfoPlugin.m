@@ -1,3 +1,6 @@
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+
 #import "GetWifiInfoPlugin.h"
 
 @implementation GetWifiInfoPlugin
@@ -11,7 +14,7 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"getWifiInfo" isEqualToString:call.method]) {
-    result([self getWifiIP]]);
+    result([self getWifiIP]);
   } else {
     result(FlutterMethodNotImplemented);
   }

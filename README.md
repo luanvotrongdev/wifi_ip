@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.com/luanvotrongdev/get_wifi_info.svg?branch=master)](https://travis-ci.com/luanvotrongdev/get_wifi_info)
+[![pub package](https://img.shields.io/pub/v/wifi_ip.svg)](https://pub.dartlang.org/packages/wifi_ip)
 
-# get_wifi_info
+# wifi_ip
 
 A flutter plugin to get Wifi IP info.
 
@@ -32,6 +33,16 @@ try {
 WifiInfo info;
 try {
   info = await GetWifiInfo.getWifiInfo;
+} on PlatformException {
+  print('Failed to get broadcast IP.');
+}
+```
+### Example
+``` Dart
+import 'package:wifi_ip/wifi_ip.dart';
+
+try {
+  WifiIpInfo info = await WifiIp.getWifiIp;
 } on PlatformException {
   print('Failed to get broadcast IP.');
 }

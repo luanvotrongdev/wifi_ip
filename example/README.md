@@ -1,6 +1,6 @@
-# get_wifi_info_example
+# wifi_ip_example
 
-Demonstrates how to use the get_wifi_info plugin.
+Demonstrates how to use the wifi_ip plugin.
 
 ## Getting Started
 

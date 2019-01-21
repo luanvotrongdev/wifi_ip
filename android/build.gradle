@@ -1,4 +1,4 @@
-group 'com.lulu.getwifiinfo'
+group 'com.example.wifiip'
 version '1.0-SNAPSHOT'
 
 buildscript {

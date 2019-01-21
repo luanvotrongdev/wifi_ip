@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:get_wifi_info/get_wifi_info.dart';
+import 'package:wifi_ip/wifi_ip.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  WifiInfo _result;
+  WifiIpInfo _result;
 
   @override
   void initState() {
@@ -23,9 +23,9 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
-    WifiInfo info;
+    WifiIpInfo info;
     try {
-      info = await GetWifiInfo.getWifiInfo;
+      info = await WifiIp.getWifiIp;
     } on PlatformException {
       print('Failed to get broadcast IP.');
     }

@@ -1,15 +1,11 @@
-package com.lulu.getwifiinfo;
+package com.example.wifiip;
 
 import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
-import  java.util.HashMap;
+import java.util.HashMap;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -19,25 +15,25 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import static android.content.Context.WIFI_SERVICE;
 
-/** GetWifiInfoPlugin */
-public class GetWifiInfoPlugin implements MethodCallHandler {
-  final String TAG= "GetWifiInfoPlugin";
+/** WifiIpPlugin */
+public class WifiIpPlugin implements MethodCallHandler {
+  final String TAG= "WifiIpPlugin";
   final Context context;
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.lulu.plugin/get_wifi_info");
-    channel.setMethodCallHandler(new GetWifiInfoPlugin(registrar.context()));
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.lulu.plugin/get_wifi_ip");
+    channel.setMethodCallHandler(new WifiIpPlugin(registrar.context()));
   }
 
-  GetWifiInfoPlugin(Context ctx)
+  WifiIpPlugin(Context ctx)
   {
     context = ctx;
   }
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getWifiInfo")) {
+    if (call.method.equals("getWifiIp")) {
       result.success(getWifiIP());
     } else {
       result.notImplemented();

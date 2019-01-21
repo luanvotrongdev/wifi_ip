@@ -1,19 +1,19 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-#import "GetWifiInfoPlugin.h"
+#import "WifiIpPlugin.h"
 
-@implementation GetWifiInfoPlugin
+@implementation WifiIpPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"com.lulu.plugin/get_wifi_info"
+      methodChannelWithName:@"com.lulu.plugin/get_wifi_ip"
             binaryMessenger:[registrar messenger]];
-  GetWifiInfoPlugin* instance = [[GetWifiInfoPlugin alloc] init];
+  WifiIpPlugin* instance = [[WifiIpPlugin alloc] init];
   [registrar addMethodCallDelegate:instance channel:channel];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getWifiInfo" isEqualToString:call.method]) {
+  if ([@"getWifiIp" isEqualToString:call.method]) {
     result([self getWifiIP]);
   } else {
     result(FlutterMethodNotImplemented);
@@ -50,5 +50,4 @@
     freeifaddrs(interfaces);
     return result;
 }
-
 @end

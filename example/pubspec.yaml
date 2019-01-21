@@ -1,5 +1,5 @@
-name: get_wifi_info_example
-description: Demonstrates how to use the get_wifi_info plugin.
+name: wifi_ip_example
+description: Demonstrates how to use the wifi_ip plugin.
 publish_to: 'none'
 
 environment:
@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  get_wifi_info:
+  wifi_ip:
     path: ../
 
 # For information on the generic Dart part of this file, see the

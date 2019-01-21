@@ -15,11 +15,12 @@ class WifiIpInfo {
 
 class WifiIp {
   static const MethodChannel _channel =
-  const MethodChannel('com.lulu.plugin/get_wifi_ip');
+      const MethodChannel('com.lulu.plugin/get_wifi_ip');
 
   //
   static Future<WifiIpInfo> get getWifiIp async {
-    final Map wifiInfoMap = Map<String, String>.from(await _channel.invokeMethod('getWifiIp'));
+    final Map wifiInfoMap =
+        Map<String, String>.from(await _channel.invokeMethod('getWifiIp'));
     return WifiIpInfo.fromMap(wifiInfoMap);
   }
 }

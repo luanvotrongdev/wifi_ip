@@ -1,12 +1,12 @@
 name: wifi_ip
 description: A flutter plugin to get Wifi IP info.
-version: 0.0.1
+version: 0.0.2
 author: Vo Trong Luan <luan.votrongdev@gmail.com>
 homepage: https://github.com/luanvotrongdev/wifi_ip
 github: https://github.com/luanvotrongdev/wifi_ip
 
 environment:
-  sdk: ">=2.0.0-dev.28.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:

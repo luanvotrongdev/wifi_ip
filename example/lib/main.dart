@@ -53,9 +53,9 @@ class _MyAppState extends State<MyApp> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("IP: ${_result.ip}"),
-              Text("Netmask: ${_result.netmask}"),
-              Text("Broadcast IP: ${_result.broadcastIP}"),
+              Text("IP: ${_result.ip!}"),
+              Text("Netmask: ${_result.netmask!}"),
+              Text("Broadcast IP: ${_result.broadcastIP!}"),
             ],
           ),
         ),
